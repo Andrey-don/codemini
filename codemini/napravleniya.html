@@ -77,7 +77,7 @@
   background: var(--nd-lp); padding: 3px 10px; border-radius: 20px;
 }
 .nd-card-body { padding: 0 28px 24px; flex: 1; }
-.nd-card-desc { font-size: 15px; color: #3a3a4a; line-height: 1.65; margin-bottom: 20px; min-height: 110px; }
+.nd-card-desc { font-size: 15px; color: #3a3a4a; line-height: 1.65; margin-bottom: 20px; }
 
 .nd-card-what {
   background: var(--nd-cream); border-radius: 14px; padding: 16px 18px; margin-bottom: 20px;
@@ -365,3 +365,40 @@
 </section>
 
 </div><!-- /nd -->
+
+<script>
+(function() {
+  function equalizeRows(selector) {
+    var els = document.querySelectorAll(selector);
+    if (!els.length) return;
+    // Сброс высот
+    els.forEach(function(el) { el.style.height = ''; });
+    // Группируем по строкам по позиции top
+    var rows = {};
+    els.forEach(function(el) {
+      var top = el.getBoundingClientRect().top;
+      var key = Math.round(top);
+      if (!rows[key]) rows[key] = [];
+      rows[key].push(el);
+    });
+    // Выравниваем высоту в каждой строке
+    Object.values(rows).forEach(function(row) {
+      var maxH = Math.max.apply(null, row.map(function(el) { return el.offsetHeight; }));
+      row.forEach(function(el) { el.style.height = maxH + 'px'; });
+    });
+  }
+
+  function run() {
+    equalizeRows('.nd-card-desc');
+    equalizeRows('.nd-card-what');
+    equalizeRows('.nd-card-schools');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+  window.addEventListener('resize', run);
+})();
+</script>
