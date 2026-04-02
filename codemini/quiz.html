@@ -1,0 +1,575 @@
+<!-- ============================================================
+     CodeMini — Страница /quiz/ — Квиз подбора школы
+     Вставить в WordPress: один блок "Произвольный HTML"
+     ============================================================ -->
+
+<style>
+.qz * { box-sizing: border-box; margin: 0; padding: 0; }
+.qz a { text-decoration: none; }
+.qz { font-family: 'Golos Text', sans-serif; color: #1E1E2E; background: #F9F8F5; line-height: 1.6; }
+
+:root {
+  --qz-green:  #7FD94C;
+  --qz-purple: #4B2D8F;
+  --qz-dark:   #1E1E2E;
+  --qz-cream:  #F9F8F5;
+  --qz-gray:   #5a5a72;
+  --qz-lp:     #f0ebff;
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+.qz-hero {
+  background: linear-gradient(135deg, #3a1f7a 0%, #2a1060 40%, #0f0f1e 100%);
+  padding: 64px 20px 56px; text-align: center;
+}
+.qz-hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(127,217,76,.15); border: 1px solid rgba(127,217,76,.3);
+  color: var(--qz-green); font-size: 13px; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.qz-hero h1 {
+  font-size: clamp(26px, 4vw, 44px); font-weight: 900; color: #fff;
+  line-height: 1.15; margin-bottom: 14px;
+}
+.qz-hero h1 span { color: var(--qz-green); }
+.qz-hero-desc {
+  font-size: 17px; color: rgba(255,255,255,.7);
+  max-width: 500px; margin: 0 auto; line-height: 1.65;
+}
+
+/* ─── КВИЗ ОБЁРТКА ────────────────────────────────────── */
+.qz-wrap { max-width: 720px; margin: 0 auto; padding: 56px 20px 80px; }
+
+/* ─── ПРОГРЕСС ────────────────────────────────────────── */
+.qz-progress { margin-bottom: 36px; }
+.qz-progress-info {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+.qz-progress-label { font-size: 13px; font-weight: 700; color: var(--qz-gray); }
+.qz-progress-num { font-size: 13px; font-weight: 700; color: var(--qz-purple); }
+.qz-progress-bar {
+  height: 6px; background: #e5e0f0; border-radius: 10px; overflow: hidden;
+}
+.qz-progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--qz-purple), var(--qz-green));
+  border-radius: 10px; transition: width .4s ease;
+}
+
+/* ─── ШАГ ─────────────────────────────────────────────── */
+.qz-step { display: none; }
+.qz-step.active { display: block; }
+
+.qz-question {
+  font-size: clamp(20px, 2.5vw, 26px); font-weight: 700;
+  margin-bottom: 8px; line-height: 1.3;
+}
+.qz-question-hint {
+  font-size: 14px; color: var(--qz-gray); margin-bottom: 28px;
+}
+
+/* ─── ВАРИАНТЫ ────────────────────────────────────────── */
+.qz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.qz-options.cols-1 { grid-template-columns: 1fr; }
+
+.qz-option {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: #fff; border: 2px solid #ede8f8; border-radius: 16px;
+  padding: 18px 20px; cursor: pointer;
+  transition: border-color .15s, background .15s, transform .15s;
+  text-align: left;
+}
+.qz-option:hover {
+  border-color: var(--qz-purple); background: var(--qz-lp);
+  transform: translateY(-2px);
+}
+.qz-option.selected {
+  border-color: var(--qz-green); background: #f0fff0;
+}
+.qz-option-emo { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+.qz-option-text { }
+.qz-option-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+.qz-option-sub { font-size: 13px; color: var(--qz-gray); line-height: 1.4; }
+
+/* ─── НАВИГАЦИЯ ───────────────────────────────────────── */
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+.qz-btn-back {
+  background: transparent; border: 2px solid #e5e0f0; color: var(--qz-gray);
+  font-family: 'Golos Text', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 12px 24px; border-radius: 12px; cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.qz-btn-back:hover { border-color: var(--qz-purple); color: var(--qz-purple); }
+.qz-btn-next {
+  background: var(--qz-green); color: var(--qz-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 15px; font-weight: 700;
+  padding: 14px 32px; border-radius: 12px; border: none; cursor: pointer;
+  transition: background .15s, transform .15s; opacity: .4; pointer-events: none;
+}
+.qz-btn-next.enabled { opacity: 1; pointer-events: all; }
+.qz-btn-next.enabled:hover { background: #6bc73a; transform: translateY(-1px); }
+
+/* ─── РЕЗУЛЬТАТ ───────────────────────────────────────── */
+.qz-result { display: none; }
+.qz-result.active { display: block; }
+.qz-result-header { text-align: center; margin-bottom: 40px; }
+.qz-result-ico { font-size: 64px; margin-bottom: 16px; }
+.qz-result-title {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 900; margin-bottom: 10px;
+}
+.qz-result-sub { font-size: 16px; color: var(--qz-gray); max-width: 480px; margin: 0 auto; }
+
+.qz-result-schools { margin-bottom: 36px; }
+.qz-result-schools-title {
+  font-size: 14px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .5px; color: var(--qz-gray); margin-bottom: 16px;
+}
+.qz-rcard {
+  background: #fff; border-radius: 20px; padding: 24px;
+  border: 2px solid #ede8f8; margin-bottom: 14px;
+  display: flex; align-items: flex-start; gap: 18px;
+}
+.qz-rcard:first-child { border-color: var(--qz-green); }
+.qz-rcard-emo { font-size: 36px; flex-shrink: 0; }
+.qz-rcard-body { flex: 1; }
+.qz-rcard-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.qz-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+}
+.qz-badge-top { background: var(--qz-green); color: var(--qz-dark); }
+.qz-badge-age { background: var(--qz-lp); color: var(--qz-purple); }
+.qz-rcard-name { font-size: 18px; font-weight: 900; margin-bottom: 4px; }
+.qz-rcard-why { font-size: 14px; color: #3a3a4a; line-height: 1.6; margin-bottom: 14px; }
+.qz-rcard-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--qz-green); color: var(--qz-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 10px 20px; border-radius: 10px; transition: background .15s;
+}
+.qz-rcard-cta:hover { background: #6bc73a; color: var(--qz-dark); }
+
+.qz-result-restart {
+  text-align: center; margin-top: 24px;
+}
+.qz-restart-btn {
+  background: transparent; border: 2px solid #e5e0f0; color: var(--qz-gray);
+  font-family: 'Golos Text', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 12px 28px; border-radius: 12px; cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.qz-restart-btn:hover { border-color: var(--qz-purple); color: var(--qz-purple); }
+
+/* ─── АДАПТИВ ─────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .qz-options { grid-template-columns: 1fr; }
+  .qz-hero { padding: 48px 16px 40px; }
+  .qz-wrap { padding: 36px 16px 56px; }
+  .qz-rcard { flex-direction: column; gap: 12px; }
+}
+</style>
+
+<div class="qz">
+
+<!-- ═══ HERO ═══ -->
+<section class="qz-hero">
+  <div class="qz-hero-tag">Бесплатно · 2 минуты</div>
+  <h1>Подберём школу<br><span>именно для вашего ребёнка</span></h1>
+  <p class="qz-hero-desc">5 простых вопросов — и вы получите персональную подборку из 2–3 школ с объяснением почему они подходят</p>
+</section>
+
+<!-- ═══ КВИЗ ═══ -->
+<div class="qz-wrap">
+
+  <!-- ПРОГРЕСС -->
+  <div class="qz-progress" id="qz-progress">
+    <div class="qz-progress-info">
+      <span class="qz-progress-label">Вопрос <span id="qz-current">1</span> из 5</span>
+      <span class="qz-progress-num" id="qz-pct">20%</span>
+    </div>
+    <div class="qz-progress-bar">
+      <div class="qz-progress-fill" id="qz-fill" style="width:20%"></div>
+    </div>
+  </div>
+
+  <!-- ШАГ 1 — ВОЗРАСТ -->
+  <div class="qz-step active" data-step="1">
+    <div class="qz-question">Сколько лет вашему ребёнку?</div>
+    <div class="qz-question-hint">Возраст определяет методику и выбор школ</div>
+    <div class="qz-options cols-1">
+      <div class="qz-option" data-value="5-7" onclick="selectOption(this)">
+        <span class="qz-option-emo">🐣</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">5–7 лет</div>
+          <div class="qz-option-sub">Дошкольник или 1–2 класс. Нужен игровой формат, короткие занятия</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="8-11" onclick="selectOption(this)">
+        <span class="qz-option-emo">🧒</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">8–11 лет</div>
+          <div class="qz-option-sub">Младшая школа. Готов учиться систематически, делать проекты</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="12-14" onclick="selectOption(this)">
+        <span class="qz-option-emo">🧑</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">12–14 лет</div>
+          <div class="qz-option-sub">Средняя школа. Время серьёзного программирования и первых проектов</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="15-17" onclick="selectOption(this)">
+        <span class="qz-option-emo">🧑‍💻</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">15–17 лет</div>
+          <div class="qz-option-sub">Старшеклассник. Возможно, нужна подготовка к ЕГЭ или портфолио</div>
+        </div>
+      </div>
+    </div>
+    <div class="qz-nav">
+      <span></span>
+      <button class="qz-btn-next" id="btn-next-1" onclick="nextStep(1)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- ШАГ 2 — ЦЕЛЬ -->
+  <div class="qz-step" data-step="2">
+    <div class="qz-question">Какая главная цель?</div>
+    <div class="qz-question-hint">Выберите то, что важнее всего прямо сейчас</div>
+    <div class="qz-options cols-1">
+      <div class="qz-option" data-value="interest" onclick="selectOption(this)">
+        <span class="qz-option-emo">✨</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Зажечь интерес к технологиям</div>
+          <div class="qz-option-sub">Попробовать IT, понять нравится ли — без давления и серьёзных обязательств</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="skills" onclick="selectOption(this)">
+        <span class="qz-option-emo">💪</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Научить серьёзно программировать</div>
+          <div class="qz-option-sub">Хочу чтобы ребёнок получил реальные навыки и сделал проекты для портфолио</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="ege" onclick="selectOption(this)">
+        <span class="qz-option-emo">📝</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Подготовиться к ЕГЭ по информатике</div>
+          <div class="qz-option-sub">Нужен высокий балл на экзамене для поступления в IT-вуз</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="games" onclick="selectOption(this)">
+        <span class="qz-option-emo">🎮</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Создать игру / направить энергию</div>
+          <div class="qz-option-sub">Ребёнок много играет — хочу превратить это в полезное занятие</div>
+        </div>
+      </div>
+    </div>
+    <div class="qz-nav">
+      <button class="qz-btn-back" onclick="prevStep(2)">← Назад</button>
+      <button class="qz-btn-next" id="btn-next-2" onclick="nextStep(2)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- ШАГ 3 — БЮДЖЕТ -->
+  <div class="qz-step" data-step="3">
+    <div class="qz-question">Какой бюджет на курс?</div>
+    <div class="qz-question-hint">В месяц, за 4 занятия</div>
+    <div class="qz-options">
+      <div class="qz-option" data-value="budget-low" onclick="selectOption(this)">
+        <span class="qz-option-emo">💚</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">До 2 000 ₽/мес</div>
+          <div class="qz-option-sub">Ищу доступный вариант</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="budget-mid" onclick="selectOption(this)">
+        <span class="qz-option-emo">💛</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">2 000–3 000 ₽/мес</div>
+          <div class="qz-option-sub">Готов платить за качество</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="budget-high" onclick="selectOption(this)">
+        <span class="qz-option-emo">💜</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Выше 3 000 ₽/мес</div>
+          <div class="qz-option-sub">Бюджет не главное, важен результат</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="budget-any" onclick="selectOption(this)">
+        <span class="qz-option-emo">🤷</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Пока не знаю</div>
+          <div class="qz-option-sub">Хочу сначала посмотреть варианты</div>
+        </div>
+      </div>
+    </div>
+    <div class="qz-nav">
+      <button class="qz-btn-back" onclick="prevStep(3)">← Назад</button>
+      <button class="qz-btn-next" id="btn-next-3" onclick="nextStep(3)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- ШАГ 4 — ИНТЕРЕС -->
+  <div class="qz-step" data-step="4">
+    <div class="qz-question">Что больше интересует ребёнка?</div>
+    <div class="qz-question-hint">Можно выбрать один вариант — самый близкий</div>
+    <div class="qz-options">
+      <div class="qz-option" data-value="int-code" onclick="selectOption(this)">
+        <span class="qz-option-emo">💻</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Программирование и код</div>
+          <div class="qz-option-sub">Python, Scratch, создание программ</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="int-games" onclick="selectOption(this)">
+        <span class="qz-option-emo">🎮</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Игры (Minecraft, Roblox)</div>
+          <div class="qz-option-sub">Создавать игры и миры</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="int-robots" onclick="selectOption(this)">
+        <span class="qz-option-emo">🤖</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Роботы и техника</div>
+          <div class="qz-option-sub">Собирать и программировать роботов</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="int-design" onclick="selectOption(this)">
+        <span class="qz-option-emo">🎨</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Дизайн и творчество</div>
+          <div class="qz-option-sub">Рисование, интерфейсы, сайты</div>
+        </div>
+      </div>
+    </div>
+    <div class="qz-nav">
+      <button class="qz-btn-back" onclick="prevStep(4)">← Назад</button>
+      <button class="qz-btn-next" id="btn-next-4" onclick="nextStep(4)">Далее →</button>
+    </div>
+  </div>
+
+  <!-- ШАГ 5 — ПРОБНЫЙ УРОК -->
+  <div class="qz-step" data-step="5">
+    <div class="qz-question">Как вы хотите начать?</div>
+    <div class="qz-question-hint">Это поможет подобрать правильный первый шаг</div>
+    <div class="qz-options cols-1">
+      <div class="qz-option" data-value="trial-free" onclick="selectOption(this)">
+        <span class="qz-option-emo">🎁</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Хочу бесплатный пробный урок</div>
+          <div class="qz-option-sub">Попробовать без рисков, прежде чем платить</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="trial-read" onclick="selectOption(this)">
+        <span class="qz-option-emo">📖</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Сначала почитаю обзоры</div>
+          <div class="qz-option-sub">Хочу изучить информацию перед записью</div>
+        </div>
+      </div>
+      <div class="qz-option" data-value="trial-now" onclick="selectOption(this)">
+        <span class="qz-option-emo">🚀</span>
+        <div class="qz-option-text">
+          <div class="qz-option-title">Готов записаться сразу</div>
+          <div class="qz-option-sub">Уже решил, нужно только выбрать школу</div>
+        </div>
+      </div>
+    </div>
+    <div class="qz-nav">
+      <button class="qz-btn-back" onclick="prevStep(5)">← Назад</button>
+      <button class="qz-btn-next" id="btn-next-5" onclick="showResult()">Получить результат →</button>
+    </div>
+  </div>
+
+  <!-- РЕЗУЛЬТАТ -->
+  <div class="qz-result" id="qz-result">
+    <div class="qz-result-header">
+      <div class="qz-result-ico">🎯</div>
+      <div class="qz-result-title">Ваша подборка готова!</div>
+      <div class="qz-result-sub" id="qz-result-sub">На основе ваших ответов подобрали лучшие школы</div>
+    </div>
+
+    <div class="qz-result-schools">
+      <div class="qz-result-schools-title">Рекомендуем:</div>
+      <div id="qz-schools-list"></div>
+    </div>
+
+    <div class="qz-result-restart">
+      <button class="qz-restart-btn" onclick="restartQuiz()">← Пройти тест заново</button>
+    </div>
+  </div>
+
+</div><!-- /qz-wrap -->
+</div><!-- /qz -->
+
+<script>
+(function() {
+  var answers = {};
+
+  var schools = {
+    progkids: {
+      emo: '🚀', name: 'Progkids',
+      age: '7–17 лет', badge: 'Топ выбор',
+      why: 'Отличный выбор для серьёзного обучения Python и веб-разработке. Проектный подход — ребёнок создаёт реальные игры и сайты. Бесплатный пробный урок.',
+      link: '/shkoly/progkids/'
+    },
+    rebotica: {
+      emo: '🤖', name: 'Rebotica',
+      age: '5–16 лет', badge: null,
+      why: 'Берут с 5 лет. Робототехника + программирование — ребёнок сразу видит результат. Первое занятие бесплатно, доступные цены.',
+      link: '/shkoly/rebotica/'
+    },
+    ukids: {
+      emo: '🎮', name: 'Ukids',
+      age: '5–14 лет', badge: 'Малышам',
+      why: 'Программирование через Minecraft и Roblox. Дети не замечают, что учатся — они просто создают любимые игры. Высокая вовлечённость.',
+      link: '/shkoly/ukids/'
+    },
+    ajtigenio: {
+      emo: '💡', name: 'Айтигенио',
+      age: '6–17 лет', badge: null,
+      why: 'Широкий выбор направлений: программирование, дизайн, аналитика. Подходит, если ребёнок ещё не определился с направлением. Доступные цены.',
+      link: '/shkoly/ajtigenio/'
+    },
+    rocket: {
+      emo: '🛸', name: 'Rocket Tech',
+      age: '5–17 лет', badge: null,
+      why: 'Живые преподаватели онлайн. Широкий возрастной диапазон. Пробный урок за 469 ₽ — убедитесь в качестве до оплаты.',
+      link: '/shkoly/rocket-tech/'
+    },
+    godograf: {
+      emo: '📚', name: 'Годограф',
+      age: '14–17 лет', badge: 'ЕГЭ',
+      why: 'Специализация — ЕГЭ по информатике. Высокий процент учеников 80+. Разбор всех типов заданий, практика на реальных вариантах.',
+      link: '/shkoly/godograf/'
+    }
+  };
+
+  function getRecommendations() {
+    var recs = [];
+    var age = answers[1];
+    var goal = answers[2];
+    var budget = answers[3];
+    var interest = answers[4];
+
+    // ЕГЭ — только Годограф
+    if (goal === 'ege') {
+      return ['godograf', 'progkids'];
+    }
+
+    // Малыши 5-7
+    if (age === '5-7') {
+      if (interest === 'int-games') return ['ukids', 'rebotica', 'rocket'];
+      if (interest === 'int-robots') return ['rebotica', 'ukids'];
+      return ['rebotica', 'ukids', 'rocket'];
+    }
+
+    // 8-11
+    if (age === '8-11') {
+      if (interest === 'int-games') return ['ukids', 'progkids', 'rocket'];
+      if (interest === 'int-robots') return ['rebotica', 'progkids'];
+      if (interest === 'int-design') return ['ajtigenio', 'progkids'];
+      if (budget === 'budget-low') return ['rebotica', 'ajtigenio', 'ukids'];
+      return ['progkids', 'rebotica', 'ajtigenio'];
+    }
+
+    // 12-14
+    if (age === '12-14') {
+      if (interest === 'int-design') return ['ajtigenio', 'progkids'];
+      if (goal === 'games') return ['progkids', 'rocket'];
+      return ['progkids', 'ajtigenio', 'rocket'];
+    }
+
+    // 15-17
+    if (age === '15-17') {
+      if (interest === 'int-design') return ['ajtigenio', 'progkids'];
+      return ['progkids', 'godograf', 'rocket'];
+    }
+
+    return ['progkids', 'rebotica', 'ukids'];
+  }
+
+  window.selectOption = function(el) {
+    var step = parseInt(el.closest('.qz-step').dataset.step);
+    var options = el.closest('.qz-options').querySelectorAll('.qz-option');
+    options.forEach(function(o) { o.classList.remove('selected'); });
+    el.classList.add('selected');
+    answers[step] = el.dataset.value;
+    var btn = document.getElementById('btn-next-' + step);
+    if (btn) btn.classList.add('enabled');
+  };
+
+  window.nextStep = function(current) {
+    if (!answers[current]) return;
+    var next = current + 1;
+    document.querySelector('[data-step="' + current + '"]').classList.remove('active');
+    var nextEl = document.querySelector('[data-step="' + next + '"]');
+    if (nextEl) {
+      nextEl.classList.add('active');
+      updateProgress(next);
+    }
+  };
+
+  window.prevStep = function(current) {
+    var prev = current - 1;
+    document.querySelector('[data-step="' + current + '"]').classList.remove('active');
+    document.querySelector('[data-step="' + prev + '"]').classList.add('active');
+    updateProgress(prev);
+  };
+
+  window.showResult = function() {
+    if (!answers[5]) return;
+    document.querySelector('[data-step="5"]').classList.remove('active');
+    document.getElementById('qz-progress').style.display = 'none';
+
+    var recs = getRecommendations();
+    var list = document.getElementById('qz-schools-list');
+    list.innerHTML = '';
+
+    recs.slice(0, 3).forEach(function(key, i) {
+      var s = schools[key];
+      if (!s) return;
+      var div = document.createElement('div');
+      div.className = 'qz-rcard';
+      div.innerHTML =
+        '<div class="qz-rcard-emo">' + s.emo + '</div>' +
+        '<div class="qz-rcard-body">' +
+          '<div class="qz-rcard-badges">' +
+            (i === 0 ? '<span class="qz-badge qz-badge-top">Лучший выбор</span>' : '') +
+            (s.badge ? '<span class="qz-badge qz-badge-top">' + s.badge + '</span>' : '') +
+            '<span class="qz-badge qz-badge-age">' + s.age + '</span>' +
+          '</div>' +
+          '<div class="qz-rcard-name">' + s.name + '</div>' +
+          '<div class="qz-rcard-why">' + s.why + '</div>' +
+          '<a href="' + s.link + '" class="qz-rcard-cta">Читать обзор →</a>' +
+        '</div>';
+      list.appendChild(div);
+    });
+
+    document.getElementById('qz-result').classList.add('active');
+  };
+
+  window.restartQuiz = function() {
+    answers = {};
+    document.getElementById('qz-result').classList.remove('active');
+    document.getElementById('qz-progress').style.display = 'block';
+    document.querySelectorAll('.qz-step').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelector('[data-step="1"]').classList.add('active');
+    document.querySelectorAll('.qz-option').forEach(function(o) { o.classList.remove('selected'); });
+    document.querySelectorAll('.qz-btn-next').forEach(function(b) { b.classList.remove('enabled'); });
+    updateProgress(1);
+  };
+
+  function updateProgress(step) {
+    var pct = Math.round((step / 5) * 100);
+    document.getElementById('qz-current').textContent = step;
+    document.getElementById('qz-pct').textContent = pct + '%';
+    document.getElementById('qz-fill').style.width = pct + '%';
+  }
+})();
+</script>
