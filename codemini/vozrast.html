@@ -1,0 +1,461 @@
+<!-- ============================================================
+     CodeMini — Страница /vozrast/ — Курсы по возрасту
+     Вставить в WordPress: один блок "Произвольный HTML"
+     ============================================================ -->
+
+<style>
+.vz * { box-sizing: border-box; margin: 0; padding: 0; }
+.vz a { text-decoration: none; }
+.vz { font-family: 'Golos Text', sans-serif; color: #1E1E2E; background: #F9F8F5; line-height: 1.6; }
+
+:root {
+  --vz-green:  #7FD94C;
+  --vz-purple: #4B2D8F;
+  --vz-dark:   #1E1E2E;
+  --vz-cream:  #F9F8F5;
+  --vz-gray:   #5a5a72;
+  --vz-lp:     #f0ebff;
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+.vz-hero {
+  background: linear-gradient(135deg, #3a1f7a 0%, #2a1060 40%, #0f0f1e 100%);
+  padding: 72px 20px 64px; text-align: center;
+}
+.vz-hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(127,217,76,.15); border: 1px solid rgba(127,217,76,.3);
+  color: var(--vz-green); font-size: 13px; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.vz-hero h1 {
+  font-size: clamp(28px, 4vw, 48px); font-weight: 900; color: #fff;
+  line-height: 1.15; margin-bottom: 16px;
+}
+.vz-hero h1 span { color: var(--vz-green); }
+.vz-hero-desc {
+  font-size: 18px; color: rgba(255,255,255,.7);
+  max-width: 560px; margin: 0 auto 40px; line-height: 1.65;
+}
+.vz-age-tabs {
+  display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+}
+.vz-age-tab {
+  padding: 10px 24px; border-radius: 24px; font-size: 15px; font-weight: 700;
+  border: 2px solid rgba(255,255,255,.25); color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.08); cursor: pointer;
+  transition: all .15s; text-decoration: none;
+}
+.vz-age-tab:hover {
+  border-color: var(--vz-green); color: var(--vz-green);
+  background: rgba(127,217,76,.1);
+}
+
+/* ─── СЕКЦИИ ВОЗРАСТА ─────────────────────────────────── */
+.vz-section { padding: 72px 20px; }
+.vz-wrap { max-width: 1140px; margin: 0 auto; }
+
+.vz-section:nth-child(even) { background: #fff; }
+.vz-section:nth-child(odd) { background: var(--vz-cream); }
+
+.vz-section-header {
+  display: grid; grid-template-columns: auto 1fr; gap: 28px;
+  align-items: center; margin-bottom: 48px;
+}
+.vz-age-badge {
+  width: 96px; height: 96px; border-radius: 24px; flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-size: 36px; line-height: 1;
+}
+.vz-age-badge-1 { background: linear-gradient(145deg, #3d2280, #6b3bbf); }
+.vz-age-badge-2 { background: linear-gradient(145deg, #116644, #1da870); }
+.vz-age-badge-3 { background: linear-gradient(145deg, #9e3e14, #d4692e); }
+
+.vz-section-title { font-size: clamp(22px, 3vw, 34px); font-weight: 900; margin-bottom: 6px; }
+.vz-section-sub { font-size: 16px; color: var(--vz-gray); }
+
+/* ─── ИНФО БЛОК ───────────────────────────────────────── */
+.vz-info-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 40px;
+}
+.vz-info-card {
+  background: #fff; border-radius: 20px; padding: 28px;
+  border: 2px solid #ede8f8;
+}
+.vz-info-card.dark {
+  background: linear-gradient(135deg, #3a1f7a, #1e1e2e);
+  border-color: transparent; color: #fff;
+}
+.vz-info-title {
+  font-size: 14px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .5px; color: var(--vz-purple); margin-bottom: 16px;
+}
+.vz-info-card.dark .vz-info-title { color: var(--vz-green); }
+.vz-info-list li {
+  font-size: 15px; padding: 6px 0; list-style: none;
+  display: flex; gap: 10px; align-items: flex-start;
+  border-bottom: 1px solid rgba(0,0,0,.06); line-height: 1.4;
+}
+.vz-info-card.dark .vz-info-list li { border-bottom-color: rgba(255,255,255,.08); color: rgba(255,255,255,.85); }
+.vz-info-list li:last-child { border-bottom: none; }
+.vz-info-list li::before { content: '→'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.vz-info-card .vz-info-list li::before { color: var(--vz-purple); }
+.vz-info-card.dark .vz-info-list li::before { color: var(--vz-green); }
+
+/* ─── КАРТОЧКИ ШКОЛ ───────────────────────────────────── */
+.vz-schools-title {
+  font-size: 18px; font-weight: 700; margin-bottom: 20px;
+}
+.vz-schools-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px;
+}
+.vz-school {
+  background: #fff; border-radius: 16px; padding: 20px;
+  border: 2px solid #ede8f8;
+  transition: border-color .2s, transform .2s;
+  display: flex; flex-direction: column;
+}
+.vz-section:nth-child(even) .vz-school { background: var(--vz-cream); }
+.vz-school:hover { border-color: var(--vz-green); transform: translateY(-3px); }
+.vz-school-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.vz-school-emo { font-size: 28px; }
+.vz-school-nm { font-size: 16px; font-weight: 700; }
+.vz-school-age { font-size: 12px; color: var(--vz-purple); background: var(--vz-lp); padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.vz-school-dsc { font-size: 13px; color: var(--vz-gray); line-height: 1.5; margin-bottom: 14px; flex: 1; }
+.vz-school-link {
+  display: block; text-align: center;
+  background: var(--vz-green); color: var(--vz-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 9px; border-radius: 10px; transition: background .15s;
+}
+.vz-school-link:hover { background: #6bc73a; color: var(--vz-dark); }
+
+.vz-section-cta { text-align: center; }
+.vz-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--vz-purple); color: #fff;
+  font-family: 'Golos Text', sans-serif; font-size: 15px; font-weight: 700;
+  padding: 14px 32px; border-radius: 12px;
+  transition: background .15s, transform .15s;
+}
+.vz-btn:hover { background: #3a2070; color: #fff; transform: translateY(-2px); }
+
+/* ─── BOTTOM CTA ──────────────────────────────────────── */
+.vz-bottom {
+  background: linear-gradient(135deg, var(--vz-purple) 0%, var(--vz-dark) 100%);
+  padding: 72px 20px; text-align: center;
+}
+.vz-bottom h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: #fff; margin-bottom: 16px; }
+.vz-bottom p { font-size: 17px; color: rgba(255,255,255,.65); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.vz-btn-green {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--vz-green); color: var(--vz-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 16px; font-weight: 700;
+  padding: 16px 36px; border-radius: 12px;
+  transition: transform .15s, box-shadow .15s;
+}
+.vz-btn-green:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(127,217,76,.4); color: var(--vz-dark); }
+
+/* ─── АДАПТИВ ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .vz-schools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+  .vz-info-grid { grid-template-columns: 1fr; }
+  .vz-schools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .vz-hero { padding: 52px 16px 48px; }
+  .vz-section { padding: 52px 16px; }
+  .vz-section-header { grid-template-columns: 1fr; gap: 16px; }
+  .vz-age-badge { width: 72px; height: 72px; font-size: 28px; }
+  .vz-schools-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="vz">
+
+<!-- ═══ HERO ═══ -->
+<section class="vz-hero">
+  <div class="vz-hero-tag">По возрасту</div>
+  <h1>Курсы программирования<br><span>по возрасту ребёнка</span></h1>
+  <p class="vz-hero-desc">Разные возрасты — разные задачи и методики. Подбираем школу с учётом того, сколько лет вашему ребёнку</p>
+  <div class="vz-age-tabs">
+    <a href="#age-5-7" class="vz-age-tab">🐣 5–7 лет</a>
+    <a href="#age-8-11" class="vz-age-tab">🧒 8–11 лет</a>
+    <a href="#age-12-17" class="vz-age-tab">🧑‍💻 12–17 лет</a>
+  </div>
+</section>
+
+<!-- ═══ 5–7 ЛЕТ ═══ -->
+<section class="vz-section" id="age-5-7">
+  <div class="vz-wrap">
+    <div class="vz-section-header">
+      <div class="vz-age-badge vz-age-badge-1">🐣</div>
+      <div>
+        <div class="vz-section-title">5–7 лет — первые шаги в IT</div>
+        <div class="vz-section-sub">Малышам нужен особый подход: игра, короткие занятия, визуальное мышление</div>
+      </div>
+    </div>
+
+    <div class="vz-info-grid">
+      <div class="vz-info-card">
+        <div class="vz-info-title">Что важно в этом возрасте</div>
+        <ul class="vz-info-list">
+          <li>Занятия не дольше 25–30 минут</li>
+          <li>Без печатания — мышь, планшет, drag-and-drop</li>
+          <li>Визуальное программирование: Scratch Jr, блоки</li>
+          <li>Игровой формат — ребёнок не должен «учиться»</li>
+          <li>Маленькие группы — преподаватель видит каждого</li>
+        </ul>
+      </div>
+      <div class="vz-info-card dark">
+        <div class="vz-info-title">Чего ждать от курса</div>
+        <ul class="vz-info-list">
+          <li>Ребёнок научится мыслить по алгоритму</li>
+          <li>Поймёт понятия «последовательность» и «условие»</li>
+          <li>Создаст первую простую игру или анимацию</li>
+          <li>Появится интерес к технологиям</li>
+          <li>Развитие логики и внимания</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vz-schools-title">Лучшие школы для детей 5–7 лет</div>
+    <div class="vz-schools-grid">
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🤖</span>
+          <div>
+            <div class="vz-school-nm">Rebotica</div>
+            <span class="vz-school-age">от 5 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Робототехника + Scratch. Ребёнок видит результат сразу — собрал и запрограммировал. Первое занятие бесплатно.</p>
+        <a href="/shkoly/rebotica/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🎮</span>
+          <div>
+            <div class="vz-school-nm">Ukids</div>
+            <span class="vz-school-age">от 5 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Minecraft и Roblox как инструмент обучения. Дети не замечают, что учатся — они просто играют и создают.</p>
+        <a href="/shkoly/ukids/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🛸</span>
+          <div>
+            <div class="vz-school-nm">Rocket Tech</div>
+            <span class="vz-school-age">от 5 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Живые преподаватели онлайн. Пробный урок за 469 ₽ — убедитесь в формате до оплаты курса.</p>
+        <a href="/shkoly/rocket-tech/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🚀</span>
+          <div>
+            <div class="vz-school-nm">Progkids</div>
+            <span class="vz-school-age">от 7 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Переход на следующий уровень после 7 лет. Scratch и первые шаги в Python с опытными преподавателями.</p>
+        <a href="/shkoly/progkids/" class="vz-school-link">Читать обзор →</a>
+      </div>
+    </div>
+    <div class="vz-section-cta">
+      <a href="/shkoly/" class="vz-btn">Все школы для малышей →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8–11 ЛЕТ ═══ -->
+<section class="vz-section" id="age-8-11">
+  <div class="vz-wrap">
+    <div class="vz-section-header">
+      <div class="vz-age-badge vz-age-badge-2">🧒</div>
+      <div>
+        <div class="vz-section-title">8–11 лет — осознанное обучение</div>
+        <div class="vz-section-sub">Школьник уже может учиться систематически, делать проекты и писать настоящий код</div>
+      </div>
+    </div>
+
+    <div class="vz-info-grid">
+      <div class="vz-info-card">
+        <div class="vz-info-title">Что важно в этом возрасте</div>
+        <ul class="vz-info-list">
+          <li>Переход от блоков к текстовому коду (Python, Scratch)</li>
+          <li>Проектный подход — создаёт игры и программы</li>
+          <li>Занятия 45–60 минут — уже хватает концентрации</li>
+          <li>Группы по уровню — важно не скучать и не отставать</li>
+          <li>Соревнования и хакатоны как мотивация</li>
+        </ul>
+      </div>
+      <div class="vz-info-card dark">
+        <div class="vz-info-title">Чего ждать от курса</div>
+        <ul class="vz-info-list">
+          <li>Напишет первые программы на Python или Scratch</li>
+          <li>Создаст игру или сайт в портфолио</li>
+          <li>Научится думать алгоритмически</li>
+          <li>Появится понимание профессии разработчика</li>
+          <li>Развитие математического мышления</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vz-schools-title">Лучшие школы для детей 8–11 лет</div>
+    <div class="vz-schools-grid">
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🚀</span>
+          <div>
+            <div class="vz-school-nm">Progkids</div>
+            <span class="vz-school-age">7–17 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Проектный подход — дети делают реальные игры и сайты. Опытные преподаватели, программа по уровням.</p>
+        <a href="/shkoly/progkids/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🤖</span>
+          <div>
+            <div class="vz-school-nm">Rebotica</div>
+            <span class="vz-school-age">5–16 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Для тех, кто хочет не только программировать, но и работать с роботами. Хороший переход в этом возрасте.</p>
+        <a href="/shkoly/rebotica/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">💡</span>
+          <div>
+            <div class="vz-school-nm">Айтигенио</div>
+            <span class="vz-school-age">6–17 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Много направлений: программирование, дизайн, аналитика. Подходит, если ребёнок ещё не определился.</p>
+        <a href="/shkoly/ajtigenio/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🎮</span>
+          <div>
+            <div class="vz-school-nm">Ukids</div>
+            <span class="vz-school-age">5–14 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Программирование через Minecraft и Roblox. Отлично удерживает интерес детей 8–11 лет.</p>
+        <a href="/shkoly/ukids/" class="vz-school-link">Читать обзор →</a>
+      </div>
+    </div>
+    <div class="vz-section-cta">
+      <a href="/shkoly/" class="vz-btn">Все школы для школьников →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12–17 ЛЕТ ═══ -->
+<section class="vz-section" id="age-12-17">
+  <div class="vz-wrap">
+    <div class="vz-section-header">
+      <div class="vz-age-badge vz-age-badge-3">🧑‍💻</div>
+      <div>
+        <div class="vz-section-title">12–17 лет — профессиональный старт</div>
+        <div class="vz-section-sub">Подростки могут учиться серьёзно: Python, веб, подготовка к ЕГЭ, первые проекты для портфолио</div>
+      </div>
+    </div>
+
+    <div class="vz-info-grid">
+      <div class="vz-info-card">
+        <div class="vz-info-title">Что важно в этом возрасте</div>
+        <ul class="vz-info-list">
+          <li>Серьёзные языки: Python, JavaScript, C++</li>
+          <li>Портфолио для поступления в вуз</li>
+          <li>Подготовка к ЕГЭ по информатике (14–17 лет)</li>
+          <li>Возможность начать фриланс после курса</li>
+          <li>Менторство от практикующих разработчиков</li>
+        </ul>
+      </div>
+      <div class="vz-info-card dark">
+        <div class="vz-info-title">Чего ждать от курса</div>
+        <ul class="vz-info-list">
+          <li>Владение одним языком программирования</li>
+          <li>Готовое портфолио из 2–3 проектов</li>
+          <li>Подготовка к ЕГЭ / олимпиадам</li>
+          <li>Понимание карьерных путей в IT</li>
+          <li>Первый опыт командной разработки</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vz-schools-title">Лучшие школы для подростков 12–17 лет</div>
+    <div class="vz-schools-grid">
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🚀</span>
+          <div>
+            <div class="vz-school-nm">Progkids</div>
+            <span class="vz-school-age">7–17 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Python и веб-разработка на серьёзном уровне. Реальные проекты, портфолио, преподаватели-практики.</p>
+        <a href="/shkoly/progkids/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">📚</span>
+          <div>
+            <div class="vz-school-nm">Годограф</div>
+            <span class="vz-school-age">14–17 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Специализация — ЕГЭ по информатике. Высокий процент учеников 80+. Разбор всех типов заданий.</p>
+        <a href="/shkoly/godograf/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">💡</span>
+          <div>
+            <div class="vz-school-nm">Айтигенио</div>
+            <span class="vz-school-age">6–17 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Дизайн, аналитика, кибербезопасность — если ребёнок хочет IT, но не только программирование.</p>
+        <a href="/shkoly/ajtigenio/" class="vz-school-link">Читать обзор →</a>
+      </div>
+      <div class="vz-school">
+        <div class="vz-school-top">
+          <span class="vz-school-emo">🛸</span>
+          <div>
+            <div class="vz-school-nm">Rocket Tech</div>
+            <span class="vz-school-age">5–17 лет</span>
+          </div>
+        </div>
+        <p class="vz-school-dsc">Живые преподаватели, серьёзные программы для подростков. Пробный урок за 469 ₽ перед полным курсом.</p>
+        <a href="/shkoly/rocket-tech/" class="vz-school-link">Читать обзор →</a>
+      </div>
+    </div>
+    <div class="vz-section-cta">
+      <a href="/shkoly/" class="vz-btn">Все школы для подростков →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section class="vz-bottom">
+  <div style="max-width:640px;margin:0 auto;">
+    <h2>Не знаете, с чего начать?</h2>
+    <p>Ответьте на 5 вопросов — подберём 2–3 школы, которые подходят именно вашему ребёнку</p>
+    <a href="/quiz/" class="vz-btn-green">Пройти бесплатный тест →</a>
+  </div>
+</section>
+
+</div><!-- /vz -->
