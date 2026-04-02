@@ -1,0 +1,367 @@
+<!-- ============================================================
+     CodeMini — Страница /napravleniya/ — Направления обучения
+     Вставить в WordPress: один блок "Произвольный HTML"
+     ============================================================ -->
+
+<style>
+.nd * { box-sizing: border-box; margin: 0; padding: 0; }
+.nd a { text-decoration: none; }
+.nd { font-family: 'Golos Text', sans-serif; color: #1E1E2E; background: #F9F8F5; line-height: 1.6; }
+
+:root {
+  --nd-green:  #7FD94C;
+  --nd-purple: #4B2D8F;
+  --nd-dark:   #1E1E2E;
+  --nd-cream:  #F9F8F5;
+  --nd-gray:   #5a5a72;
+  --nd-lp:     #f0ebff;
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+.nd-hero {
+  background: linear-gradient(135deg, #3a1f7a 0%, #2a1060 40%, #0f0f1e 100%);
+  padding: 72px 20px 64px; text-align: center;
+}
+.nd-hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(127,217,76,.15); border: 1px solid rgba(127,217,76,.3);
+  color: var(--nd-green); font-size: 13px; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.nd-hero h1 {
+  font-size: clamp(28px, 4vw, 48px); font-weight: 900; color: #fff;
+  line-height: 1.15; margin-bottom: 16px;
+}
+.nd-hero h1 span { color: var(--nd-green); }
+.nd-hero-desc {
+  font-size: 18px; color: rgba(255,255,255,.7);
+  max-width: 560px; margin: 0 auto; line-height: 1.65;
+}
+
+/* ─── КАРТОЧКИ НАПРАВЛЕНИЙ ────────────────────────────── */
+.nd-catalog { max-width: 1140px; margin: 0 auto; padding: 64px 20px 80px; }
+.nd-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+
+.nd-card {
+  background: #fff; border-radius: 24px; overflow: hidden;
+  border: 2px solid #ede8f8;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+  display: flex; flex-direction: column;
+}
+.nd-card:hover {
+  border-color: var(--nd-green);
+  box-shadow: 0 16px 48px rgba(75,45,143,.1);
+  transform: translateY(-4px);
+}
+.nd-card-top {
+  padding: 32px 28px 24px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+}
+.nd-card-ico {
+  width: 72px; height: 72px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center; font-size: 34px;
+}
+.nd-ico-1 { background: linear-gradient(135deg, #e3f2fd, #90caf9); }
+.nd-ico-2 { background: linear-gradient(135deg, #e8f5e9, #a5d6a7); }
+.nd-ico-3 { background: linear-gradient(135deg, #fce4ec, #f48fb1); }
+.nd-ico-4 { background: linear-gradient(135deg, #fff3e0, #ffcc80); }
+.nd-ico-5 { background: linear-gradient(135deg, #ede7f6, #ce93d8); }
+.nd-ico-6 { background: linear-gradient(135deg, #e0f7fa, #80deea); }
+
+.nd-card-name { font-size: 20px; font-weight: 900; }
+.nd-card-age {
+  font-size: 12px; font-weight: 700; color: var(--nd-purple);
+  background: var(--nd-lp); padding: 3px 10px; border-radius: 20px;
+}
+.nd-card-body { padding: 0 28px 24px; flex: 1; }
+.nd-card-desc { font-size: 15px; color: #3a3a4a; line-height: 1.65; margin-bottom: 20px; }
+
+.nd-card-what {
+  background: var(--nd-cream); border-radius: 14px; padding: 16px 18px; margin-bottom: 20px;
+}
+.nd-card-what-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .5px; color: var(--nd-purple); margin-bottom: 10px;
+}
+.nd-card-what li {
+  font-size: 13px; color: var(--nd-gray); padding: 4px 0;
+  list-style: none; display: flex; gap: 8px;
+}
+.nd-card-what li::before { content: '→'; color: var(--nd-purple); font-weight: 700; flex-shrink: 0; }
+
+.nd-card-schools { margin-bottom: 20px; }
+.nd-card-schools-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .5px; color: var(--nd-gray); margin-bottom: 10px;
+}
+.nd-card-school-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.nd-tag {
+  font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+  background: #fff; border: 1.5px solid #ede8f8; color: var(--nd-dark);
+}
+
+.nd-card-footer { padding: 0 28px 28px; }
+.nd-card-cta {
+  display: block; text-align: center;
+  background: var(--nd-green); color: var(--nd-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 13px; border-radius: 12px; transition: background .15s;
+}
+.nd-card-cta:hover { background: #6bc73a; color: var(--nd-dark); }
+
+/* ─── BOTTOM CTA ──────────────────────────────────────── */
+.nd-bottom {
+  background: linear-gradient(135deg, var(--nd-purple) 0%, var(--nd-dark) 100%);
+  padding: 72px 20px; text-align: center;
+}
+.nd-bottom h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: #fff; margin-bottom: 16px; }
+.nd-bottom p { font-size: 17px; color: rgba(255,255,255,.65); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.nd-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--nd-green); color: var(--nd-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 16px; font-weight: 700;
+  padding: 16px 36px; border-radius: 12px;
+  transition: transform .15s, box-shadow .15s;
+}
+.nd-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(127,217,76,.4); color: var(--nd-dark); }
+
+/* ─── АДАПТИВ ─────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .nd-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .nd-hero { padding: 52px 16px 48px; }
+  .nd-catalog { padding: 40px 16px 60px; }
+  .nd-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="nd">
+
+<!-- ═══ HERO ═══ -->
+<section class="nd-hero">
+  <div class="nd-hero-tag">Направления</div>
+  <h1>Направления <span>детского IT</span>-обучения</h1>
+  <p class="nd-hero-desc">Программирование, робототехника, дизайн, игры — помогаем выбрать то, что зажжёт ребёнка</p>
+</section>
+
+<!-- ═══ КАТАЛОГ ═══ -->
+<div class="nd-catalog">
+  <div class="nd-grid">
+
+    <!-- ПРОГРАММИРОВАНИЕ -->
+    <div class="nd-card">
+      <div class="nd-card-top">
+        <div class="nd-card-ico nd-ico-1">💻</div>
+        <div>
+          <div class="nd-card-name">Программирование</div>
+          <span class="nd-card-age">7–17 лет</span>
+        </div>
+      </div>
+      <div class="nd-card-body">
+        <p class="nd-card-desc">Самое популярное направление. Дети учатся писать код на Scratch, Python или JavaScript — создают игры, сайты и приложения.</p>
+        <div class="nd-card-what">
+          <div class="nd-card-what-title">Чему научится ребёнок</div>
+          <ul>
+            <li>Писать программы на Python или Scratch</li>
+            <li>Создавать игры и веб-страницы</li>
+            <li>Думать алгоритмически и решать задачи</li>
+            <li>Делать проекты для портфолио</li>
+          </ul>
+        </div>
+        <div class="nd-card-schools">
+          <div class="nd-card-schools-title">Школы этого направления</div>
+          <div class="nd-card-school-tags">
+            <span class="nd-tag">Progkids</span>
+            <span class="nd-tag">Rebotica</span>
+            <span class="nd-tag">Rocket Tech</span>
+            <span class="nd-tag">Айтигенио</span>
+          </div>
+        </div>
+      </div>
+      <div class="nd-card-footer">
+        <a href="/shkoly/" class="nd-card-cta">Выбрать школу →</a>
+      </div>
+    </div>
+
+    <!-- РОБОТОТЕХНИКА -->
+    <div class="nd-card">
+      <div class="nd-card-top">
+        <div class="nd-card-ico nd-ico-2">🤖</div>
+        <div>
+          <div class="nd-card-name">Робототехника</div>
+          <span class="nd-card-age">5–14 лет</span>
+        </div>
+      </div>
+      <div class="nd-card-body">
+        <p class="nd-card-desc">Ребёнок собирает и программирует роботов — видит результат сразу. Развивает инженерное мышление, пространственное восприятие и интерес к технике.</p>
+        <div class="nd-card-what">
+          <div class="nd-card-what-title">Чему научится ребёнок</div>
+          <ul>
+            <li>Собирать роботов из конструктора</li>
+            <li>Программировать движение и датчики</li>
+            <li>Решать инженерные задачи</li>
+            <li>Участвовать в олимпиадах по робототехнике</li>
+          </ul>
+        </div>
+        <div class="nd-card-schools">
+          <div class="nd-card-schools-title">Школы этого направления</div>
+          <div class="nd-card-school-tags">
+            <span class="nd-tag">Rebotica</span>
+          </div>
+        </div>
+      </div>
+      <div class="nd-card-footer">
+        <a href="/shkoly/rebotica/" class="nd-card-cta">Читать обзор Rebotica →</a>
+      </div>
+    </div>
+
+    <!-- РАЗРАБОТКА ИГР -->
+    <div class="nd-card">
+      <div class="nd-card-top">
+        <div class="nd-card-ico nd-ico-3">🎮</div>
+        <div>
+          <div class="nd-card-name">Разработка игр</div>
+          <span class="nd-card-age">7–17 лет</span>
+        </div>
+      </div>
+      <div class="nd-card-body">
+        <p class="nd-card-desc">Дети создают игры в Roblox, Minecraft, Scratch или Unity. Лучший способ мотивировать ребёнка — дать ему создать то, во что он сам играет.</p>
+        <div class="nd-card-what">
+          <div class="nd-card-what-title">Чему научится ребёнок</div>
+          <ul>
+            <li>Создавать игровые уровни и персонажей</li>
+            <li>Программировать игровую логику</li>
+            <li>Основам дизайна игрового процесса</li>
+            <li>Делиться играми с друзьями</li>
+          </ul>
+        </div>
+        <div class="nd-card-schools">
+          <div class="nd-card-schools-title">Школы этого направления</div>
+          <div class="nd-card-school-tags">
+            <span class="nd-tag">Ukids</span>
+            <span class="nd-tag">Progkids</span>
+            <span class="nd-tag">Rocket Tech</span>
+          </div>
+        </div>
+      </div>
+      <div class="nd-card-footer">
+        <a href="/shkoly/" class="nd-card-cta">Выбрать школу →</a>
+      </div>
+    </div>
+
+    <!-- ВЕБ-РАЗРАБОТКА -->
+    <div class="nd-card">
+      <div class="nd-card-top">
+        <div class="nd-card-ico nd-ico-4">🌐</div>
+        <div>
+          <div class="nd-card-name">Веб-разработка</div>
+          <span class="nd-card-age">10–17 лет</span>
+        </div>
+      </div>
+      <div class="nd-card-body">
+        <p class="nd-card-desc">HTML, CSS, JavaScript — ребёнок создаёт настоящие сайты. Одно из самых востребованных направлений для старшеклассников с прицелом на профессию.</p>
+        <div class="nd-card-what">
+          <div class="nd-card-what-title">Чему научится ребёнок</div>
+          <ul>
+            <li>Верстать страницы на HTML и CSS</li>
+            <li>Добавлять интерактивность на JavaScript</li>
+            <li>Создавать полноценные сайты</li>
+            <li>Публиковать проекты в интернете</li>
+          </ul>
+        </div>
+        <div class="nd-card-schools">
+          <div class="nd-card-schools-title">Школы этого направления</div>
+          <div class="nd-card-school-tags">
+            <span class="nd-tag">Progkids</span>
+            <span class="nd-tag">Айтигенио</span>
+            <span class="nd-tag">Rocket Tech</span>
+          </div>
+        </div>
+      </div>
+      <div class="nd-card-footer">
+        <a href="/shkoly/" class="nd-card-cta">Выбрать школу →</a>
+      </div>
+    </div>
+
+    <!-- ДИЗАЙН И IT -->
+    <div class="nd-card">
+      <div class="nd-card-top">
+        <div class="nd-card-ico nd-ico-5">🎨</div>
+        <div>
+          <div class="nd-card-name">Дизайн и IT</div>
+          <span class="nd-card-age">10–17 лет</span>
+        </div>
+      </div>
+      <div class="nd-card-body">
+        <p class="nd-card-desc">Для детей, которым нравится рисовать и создавать — учат графическому и UI/UX дизайну. Хорошо сочетается с веб-разработкой.</p>
+        <div class="nd-card-what">
+          <div class="nd-card-what-title">Чему научится ребёнок</div>
+          <ul>
+            <li>Работать в Figma и графических редакторах</li>
+            <li>Создавать логотипы и интерфейсы</li>
+            <li>Основам UX: как делать удобные продукты</li>
+            <li>Собирать дизайн-портфолио</li>
+          </ul>
+        </div>
+        <div class="nd-card-schools">
+          <div class="nd-card-schools-title">Школы этого направления</div>
+          <div class="nd-card-school-tags">
+            <span class="nd-tag">Айтигенио</span>
+          </div>
+        </div>
+      </div>
+      <div class="nd-card-footer">
+        <a href="/shkoly/ajtigenio/" class="nd-card-cta">Читать обзор Айтигенио →</a>
+      </div>
+    </div>
+
+    <!-- ЕГЭ ПО ИНФОРМАТИКЕ -->
+    <div class="nd-card">
+      <div class="nd-card-top">
+        <div class="nd-card-ico nd-ico-6">📚</div>
+        <div>
+          <div class="nd-card-name">ЕГЭ по информатике</div>
+          <span class="nd-card-age">14–17 лет</span>
+        </div>
+      </div>
+      <div class="nd-card-body">
+        <p class="nd-card-desc">Целенаправленная подготовка к ЕГЭ по информатике. Разбор всех типов заданий, отработка на реальных вариантах — для тех, кто хочет поступить на IT-специальность.</p>
+        <div class="nd-card-what">
+          <div class="nd-card-what-title">Чему научится ребёнок</div>
+          <ul>
+            <li>Решать все типы задач ЕГЭ по информатике</li>
+            <li>Программировать на Python для задач ЕГЭ</li>
+            <li>Работать с алгоритмами и структурами данных</li>
+            <li>Управлять временем на экзамене</li>
+          </ul>
+        </div>
+        <div class="nd-card-schools">
+          <div class="nd-card-schools-title">Школы этого направления</div>
+          <div class="nd-card-school-tags">
+            <span class="nd-tag">Годограф</span>
+            <span class="nd-tag">Progkids</span>
+          </div>
+        </div>
+      </div>
+      <div class="nd-card-footer">
+        <a href="/shkoly/godograf/" class="nd-card-cta">Читать обзор Годографа →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section class="nd-bottom">
+  <div style="max-width:640px;margin:0 auto;">
+    <h2>Не знаете, какое направление выбрать?</h2>
+    <p>Ответьте на 5 вопросов — подберём школу и направление под интересы и возраст ребёнка</p>
+    <a href="/quiz/" class="nd-btn">Пройти бесплатный тест →</a>
+  </div>
+</section>
+
+</div><!-- /nd -->
