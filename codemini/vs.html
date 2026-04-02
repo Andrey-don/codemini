@@ -1,0 +1,366 @@
+<!-- ============================================================
+     CodeMini — Страница /vs/ — Сравнения школ
+     Вставить в WordPress: один блок "Произвольный HTML"
+     ============================================================ -->
+
+<style>
+.vs * { box-sizing: border-box; margin: 0; padding: 0; }
+.vs a { text-decoration: none; }
+.vs { font-family: 'Golos Text', sans-serif; color: #1E1E2E; background: #F9F8F5; line-height: 1.6; }
+
+:root {
+  --vs-green:  #7FD94C;
+  --vs-purple: #4B2D8F;
+  --vs-dark:   #1E1E2E;
+  --vs-cream:  #F9F8F5;
+  --vs-gray:   #5a5a72;
+  --vs-lp:     #f0ebff;
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+.vs-hero {
+  background: linear-gradient(135deg, #3a1f7a 0%, #2a1060 40%, #0f0f1e 100%);
+  padding: 72px 20px 64px; text-align: center;
+}
+.vs-hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(127,217,76,.15); border: 1px solid rgba(127,217,76,.3);
+  color: var(--vs-green); font-size: 13px; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.vs-hero h1 {
+  font-size: clamp(28px, 4vw, 48px); font-weight: 900; color: #fff;
+  line-height: 1.15; margin-bottom: 16px;
+}
+.vs-hero h1 span { color: var(--vs-green); }
+.vs-hero-desc {
+  font-size: 18px; color: rgba(255,255,255,.7);
+  max-width: 560px; margin: 0 auto; line-height: 1.65;
+}
+
+/* ─── КАТАЛОГ СРАВНЕНИЙ ───────────────────────────────── */
+.vs-catalog { max-width: 1140px; margin: 0 auto; padding: 64px 20px 80px; }
+.vs-catalog-title {
+  font-size: 14px; font-weight: 700; color: var(--vs-gray);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 28px;
+}
+.vs-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 64px;
+}
+
+.vs-card {
+  background: #fff; border-radius: 24px; padding: 32px;
+  border: 2px solid #ede8f8;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+  display: flex; flex-direction: column;
+}
+.vs-card:hover {
+  border-color: var(--vs-green);
+  box-shadow: 0 16px 48px rgba(75,45,143,.1);
+  transform: translateY(-4px);
+}
+.vs-card-schools {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.vs-school-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--vs-lp); border-radius: 12px; padding: 8px 14px;
+}
+.vs-school-badge-emo { font-size: 22px; }
+.vs-school-badge-nm { font-size: 14px; font-weight: 700; color: var(--vs-dark); }
+.vs-vs-sep {
+  font-size: 16px; font-weight: 900; color: var(--vs-purple);
+  background: var(--vs-lp); padding: 6px 12px; border-radius: 8px;
+}
+.vs-card-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; line-height: 1.35; }
+.vs-card-desc { font-size: 14px; color: var(--vs-gray); line-height: 1.6; margin-bottom: 20px; flex: 1; }
+.vs-card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.vs-tag {
+  font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+  background: var(--vs-cream); border: 1.5px solid #e5e0f0; color: var(--vs-gray);
+}
+.vs-card-cta {
+  display: block; text-align: center;
+  background: var(--vs-green); color: var(--vs-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 13px; border-radius: 12px; transition: background .15s; margin-top: auto;
+}
+.vs-card-cta:hover { background: #6bc73a; color: var(--vs-dark); }
+
+/* ─── БОЛЬШАЯ ТАБЛИЦА СРАВНЕНИЯ ───────────────────────── */
+.vs-table-section { margin-bottom: 64px; }
+.vs-table-title {
+  font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; margin-bottom: 8px;
+}
+.vs-table-sub { font-size: 15px; color: var(--vs-gray); margin-bottom: 28px; }
+
+.vs-table-wrap { overflow-x: auto; border-radius: 20px; }
+.vs-table {
+  width: 100%; border-collapse: collapse; background: #fff;
+  border-radius: 20px; overflow: hidden;
+}
+.vs-table th {
+  background: var(--vs-purple); color: #fff;
+  font-size: 13px; font-weight: 700; text-align: center;
+  padding: 16px 12px; white-space: nowrap;
+}
+.vs-table th:first-child { text-align: left; background: #3a2070; }
+.vs-table td {
+  padding: 14px 12px; font-size: 14px; border-bottom: 1px solid #f0ebff;
+  text-align: center; vertical-align: middle;
+}
+.vs-table td:first-child { text-align: left; font-weight: 600; color: var(--vs-gray); }
+.vs-table tr:last-child td { border-bottom: none; }
+.vs-table tr:hover td { background: #fafafe; }
+.vs-table .yes { color: #2d7a2d; font-size: 18px; }
+.vs-table .no { color: #a03030; font-size: 18px; }
+.vs-table .maybe { color: #856404; font-size: 16px; }
+.vs-school-head {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.vs-school-head-emo { font-size: 24px; }
+.vs-school-head-nm { font-size: 13px; font-weight: 700; }
+
+/* ─── BOTTOM CTA ──────────────────────────────────────── */
+.vs-bottom {
+  background: linear-gradient(135deg, var(--vs-purple) 0%, var(--vs-dark) 100%);
+  padding: 72px 20px; text-align: center;
+}
+.vs-bottom h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; color: #fff; margin-bottom: 16px; }
+.vs-bottom p { font-size: 17px; color: rgba(255,255,255,.65); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.vs-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--vs-green); color: var(--vs-dark);
+  font-family: 'Golos Text', sans-serif; font-size: 16px; font-weight: 700;
+  padding: 16px 36px; border-radius: 12px;
+  transition: transform .15s, box-shadow .15s;
+}
+.vs-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(127,217,76,.4); color: var(--vs-dark); }
+
+/* ─── АДАПТИВ ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .vs-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .vs-hero { padding: 52px 16px 48px; }
+  .vs-catalog { padding: 40px 16px 60px; }
+}
+</style>
+
+<div class="vs">
+
+<!-- ═══ HERO ═══ -->
+<section class="vs-hero">
+  <div class="vs-hero-tag">Сравнения</div>
+  <h1>Сравниваем школы <span>честно</span></h1>
+  <p class="vs-hero-desc">Разбираем в чём разница между популярными школами — без рекламы, только факты</p>
+</section>
+
+<!-- ═══ КАТАЛОГ ═══ -->
+<div class="vs-catalog">
+
+  <!-- КАРТОЧКИ СРАВНЕНИЙ -->
+  <div class="vs-catalog-title">Популярные сравнения</div>
+  <div class="vs-grid">
+
+    <div class="vs-card">
+      <div class="vs-card-schools">
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">🚀</span><span class="vs-school-badge-nm">Progkids</span></div>
+        <div class="vs-vs-sep">VS</div>
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">🎮</span><span class="vs-school-badge-nm">Ukids</span></div>
+      </div>
+      <div class="vs-card-title">Progkids vs Ukids: серьёзное программирование или учёба через игры?</div>
+      <p class="vs-card-desc">Progkids — для тех, кто хочет глубоко изучить Python и делать реальные проекты. Ukids — для детей, которых мотивирует Minecraft и Roblox. Оба хороши, но для разных целей.</p>
+      <div class="vs-card-tags">
+        <span class="vs-tag">7–14 лет</span>
+        <span class="vs-tag">Программирование</span>
+        <span class="vs-tag">Разработка игр</span>
+      </div>
+      <a href="/progkids-vs-ukids-kakuyu-shkolu-vybrat-roditelyu/" class="vs-card-cta">Читать сравнение →</a>
+    </div>
+
+    <div class="vs-card">
+      <div class="vs-card-schools">
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">🚀</span><span class="vs-school-badge-nm">Progkids</span></div>
+        <div class="vs-vs-sep">VS</div>
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">🤖</span><span class="vs-school-badge-nm">Rebotica</span></div>
+      </div>
+      <div class="vs-card-title">Progkids vs Rebotica: что выбрать для ребёнка 7–12 лет?</div>
+      <p class="vs-card-desc">Rebotica берёт с 5 лет и предлагает робототехнику — отличный старт для малышей. Progkids — более глубокий курс по программированию для тех, кто уже готов к серьёзному коду.</p>
+      <div class="vs-card-tags">
+        <span class="vs-tag">5–17 лет</span>
+        <span class="vs-tag">Робототехника</span>
+        <span class="vs-tag">Python</span>
+      </div>
+      <a href="/shkoly/" class="vs-card-cta">Смотреть все школы →</a>
+    </div>
+
+    <div class="vs-card">
+      <div class="vs-card-schools">
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">🎮</span><span class="vs-school-badge-nm">Ukids</span></div>
+        <div class="vs-vs-sep">VS</div>
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">🤖</span><span class="vs-school-badge-nm">Rebotica</span></div>
+      </div>
+      <div class="vs-card-title">Ukids vs Rebotica: что лучше для ребёнка 5–8 лет?</div>
+      <p class="vs-card-desc">Обе школы берут детей с 5 лет, но методики разные. Ukids — через любимые игры Minecraft/Roblox. Rebotica — через реальных роботов. Выбор зависит от того, что больше нравится ребёнку.</p>
+      <div class="vs-card-tags">
+        <span class="vs-tag">5–10 лет</span>
+        <span class="vs-tag">Малышам</span>
+        <span class="vs-tag">Первый курс</span>
+      </div>
+      <a href="/shkoly/" class="vs-card-cta">Смотреть все школы →</a>
+    </div>
+
+    <div class="vs-card">
+      <div class="vs-card-schools">
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">🚀</span><span class="vs-school-badge-nm">Progkids</span></div>
+        <div class="vs-vs-sep">VS</div>
+        <div class="vs-school-badge"><span class="vs-school-badge-emo">📚</span><span class="vs-school-badge-nm">Годограф</span></div>
+      </div>
+      <div class="vs-card-title">Progkids vs Годограф: общее программирование или целенаправленно к ЕГЭ?</div>
+      <p class="vs-card-desc">Если цель — просто хорошо программировать, Progkids даст глубокие знания. Если нужно сдать ЕГЭ по информатике — Годограф специализируется именно на этом и даёт лучший результат.</p>
+      <div class="vs-card-tags">
+        <span class="vs-tag">14–17 лет</span>
+        <span class="vs-tag">ЕГЭ</span>
+        <span class="vs-tag">Подростки</span>
+      </div>
+      <a href="/shkoly/" class="vs-card-cta">Смотреть все школы →</a>
+    </div>
+
+  </div>
+
+  <!-- БОЛЬШАЯ ТАБЛИЦА -->
+  <div class="vs-table-section">
+    <div class="vs-table-title">Сравнительная таблица всех школ</div>
+    <div class="vs-table-sub">Быстро сравните ключевые параметры 6 школ в одном месте</div>
+    <div class="vs-table-wrap">
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th>Параметр</th>
+            <th><div class="vs-school-head"><span class="vs-school-head-emo">🚀</span><span class="vs-school-head-nm">Progkids</span></div></th>
+            <th><div class="vs-school-head"><span class="vs-school-head-emo">🤖</span><span class="vs-school-head-nm">Rebotica</span></div></th>
+            <th><div class="vs-school-head"><span class="vs-school-head-emo">🎮</span><span class="vs-school-head-nm">Ukids</span></div></th>
+            <th><div class="vs-school-head"><span class="vs-school-head-emo">💡</span><span class="vs-school-head-nm">Айтигенио</span></div></th>
+            <th><div class="vs-school-head"><span class="vs-school-head-emo">🛸</span><span class="vs-school-head-nm">Rocket Tech</span></div></th>
+            <th><div class="vs-school-head"><span class="vs-school-head-emo">📚</span><span class="vs-school-head-nm">Годограф</span></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Возраст</td>
+            <td>7–17 лет</td>
+            <td>5–16 лет</td>
+            <td>5–14 лет</td>
+            <td>6–17 лет</td>
+            <td>5–17 лет</td>
+            <td>14–17 лет</td>
+          </tr>
+          <tr>
+            <td>Цена от</td>
+            <td>2 500 ₽/мес</td>
+            <td>1 800 ₽/мес</td>
+            <td>2 200 ₽/мес</td>
+            <td>2 000 ₽/мес</td>
+            <td>2 800 ₽/мес</td>
+            <td>уточнять</td>
+          </tr>
+          <tr>
+            <td>Пробный урок</td>
+            <td><span class="yes">✓</span> бесплатно</td>
+            <td><span class="yes">✓</span> бесплатно</td>
+            <td><span class="yes">✓</span> бесплатно</td>
+            <td><span class="yes">✓</span> бесплатно</td>
+            <td><span class="maybe">~</span> 469 ₽</td>
+            <td><span class="yes">✓</span> есть</td>
+          </tr>
+          <tr>
+            <td>Python</td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Scratch</td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Minecraft/Roblox</td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="maybe">~</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Робототехника</td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Веб-разработка</td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Подготовка к ЕГЭ</td>
+            <td><span class="maybe">~</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Дизайн</td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Портфолио</td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="maybe">~</span></td>
+            <td><span class="maybe">~</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section class="vs-bottom">
+  <div style="max-width:640px;margin:0 auto;">
+    <h2>Всё равно сложно выбрать?</h2>
+    <p>Пройдите тест — ответьте на 5 вопросов и получите персональную подборку школ</p>
+    <a href="/quiz/" class="vs-btn">Пройти бесплатный тест →</a>
+  </div>
+</section>
+
+</div><!-- /vs -->
