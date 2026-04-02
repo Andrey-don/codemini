@@ -1,0 +1,659 @@
+<!-- ============================================================
+     CodeMini — Главная страница, блоки 2–8
+     Вставить в WordPress через Custom HTML после блока Hero
+     Цвета: #7FD94C (зелёный), #4B2D8F (фиолетовый), #F9F8F5 (кремовый), #1E1E2E (тёмный)
+     Шрифт: Golos Text (подключён через Google Fonts)
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset & base ── */
+.cm-landing * { box-sizing: border-box; margin: 0; padding: 0; }
+.cm-landing { font-family: 'Golos Text', sans-serif; color: #1E1E2E; background: #F9F8F5; }
+.cm-section { padding: 72px 24px; }
+.cm-container { max-width: 1100px; margin: 0 auto; }
+.cm-section-title {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  color: #1E1E2E;
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.cm-section-sub {
+  font-size: 17px;
+  color: #5a5a72;
+  text-align: center;
+  margin-bottom: 48px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+.cm-btn {
+  display: inline-block;
+  background: #7FD94C;
+  color: #1E1E2E;
+  font-family: 'Golos Text', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  line-height: 1;
+}
+.cm-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(127,217,76,0.4); color: #1E1E2E; text-decoration: none; }
+.cm-btn-outline {
+  background: transparent;
+  border: 2px solid #4B2D8F;
+  color: #4B2D8F;
+}
+.cm-btn-outline:hover { background: #4B2D8F; color: #fff; box-shadow: 0 6px 20px rgba(75,45,143,0.25); }
+
+/* ── БЛОК 2 — Преимущества ── */
+.cm-benefits { background: #fff; }
+.cm-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+}
+.cm-benefit-card {
+  text-align: center;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background: #F9F8F5;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cm-benefit-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(75,45,143,0.1); }
+.cm-benefit-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #4B2D8F, #7b4fd4);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 28px;
+}
+.cm-benefit-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #1E1E2E; }
+.cm-benefit-text { font-size: 15px; color: #5a5a72; line-height: 1.5; }
+
+/* ── БЛОК 3 — Топ школ ── */
+.cm-schools { background: #F9F8F5; }
+.cm-schools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+.cm-school-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.cm-school-card:hover { border-color: #7FD94C; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.cm-school-badge {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  background: #7FD94C;
+  color: #1E1E2E;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.cm-school-emoji { font-size: 40px; margin-bottom: 12px; }
+.cm-school-name { font-size: 18px; font-weight: 700; color: #1E1E2E; margin-bottom: 6px; }
+.cm-school-age { font-size: 13px; color: #7b4fd4; font-weight: 600; margin-bottom: 10px; background: #f0ebff; padding: 3px 10px; border-radius: 20px; }
+.cm-school-desc { font-size: 14px; color: #5a5a72; line-height: 1.5; margin-bottom: 16px; flex-grow: 1; }
+.cm-school-price { font-size: 15px; font-weight: 700; color: #1E1E2E; margin-bottom: 16px; }
+.cm-school-price span { color: #5a5a72; font-weight: 400; font-size: 13px; }
+.cm-school-link {
+  display: block;
+  width: 100%;
+  background: #7FD94C;
+  color: #1E1E2E;
+  font-family: 'Golos Text', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.cm-school-link:hover { background: #6bc73a; color: #1E1E2E; text-decoration: none; }
+
+/* ── БЛОК 4 — По возрасту ── */
+.cm-ages { background: #fff; }
+.cm-ages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+.cm-age-card {
+  border-radius: 20px;
+  padding: 36px 28px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.cm-age-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+.cm-age-card-1 { background: linear-gradient(135deg, #4B2D8F, #7b4fd4); }
+.cm-age-card-2 { background: linear-gradient(135deg, #1a7f5a, #2eb87e); }
+.cm-age-card-3 { background: linear-gradient(135deg, #b84f20, #e07840); }
+.cm-age-emoji { font-size: 42px; margin-bottom: 14px; display: block; }
+.cm-age-range { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+.cm-age-title { font-size: 17px; font-weight: 600; margin-bottom: 14px; opacity: 0.9; }
+.cm-age-list { list-style: none; }
+.cm-age-list li { font-size: 15px; padding: 5px 0; opacity: 0.85; line-height: 1.4; }
+.cm-age-list li::before { content: '→ '; opacity: 0.7; }
+.cm-age-btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-family: 'Golos Text', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.5);
+  transition: background 0.15s;
+}
+.cm-age-btn:hover { background: rgba(255,255,255,0.35); color: #fff; text-decoration: none; }
+
+/* ── БЛОК 5 — Квиз CTA ── */
+.cm-quiz { background: linear-gradient(135deg, #4B2D8F 0%, #1E1E2E 100%); padding: 80px 24px; }
+.cm-quiz .cm-container { text-align: center; }
+.cm-quiz-label { font-size: 13px; font-weight: 600; color: #7FD94C; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+.cm-quiz-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+.cm-quiz-sub { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.cm-quiz-steps {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.cm-quiz-step { color: rgba(255,255,255,0.8); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.cm-quiz-step-num {
+  width: 28px; height: 28px;
+  background: #7FD94C;
+  color: #1E1E2E;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+
+/* ── БЛОК 6 — Отзывы ── */
+.cm-reviews { background: #F9F8F5; }
+.cm-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+.cm-review-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.cm-review-stars { color: #f5a623; font-size: 18px; margin-bottom: 14px; letter-spacing: 2px; }
+.cm-review-text { font-size: 15px; color: #3a3a4a; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.cm-review-author { display: flex; align-items: center; gap: 12px; }
+.cm-review-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4B2D8F, #7FD94C);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.cm-review-name { font-size: 15px; font-weight: 600; color: #1E1E2E; }
+.cm-review-meta { font-size: 13px; color: #5a5a72; }
+.cm-review-quote {
+  position: absolute;
+  top: 20px; right: 24px;
+  font-size: 48px;
+  color: #f0ebff;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ── БЛОК 7 — Последние статьи ── */
+.cm-articles { background: #fff; }
+.cm-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  margin-bottom: 40px;
+}
+.cm-article-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #F9F8F5;
+  border: 1px solid #e8e4f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+.cm-article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); text-decoration: none; color: inherit; }
+.cm-article-thumb {
+  height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+}
+.cm-article-thumb-1 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+.cm-article-thumb-2 { background: linear-gradient(135deg, #ede7f6, #d1c4e9); }
+.cm-article-thumb-3 { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+.cm-article-body { padding: 20px; }
+.cm-article-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #7b4fd4;
+  background: #f0ebff;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.cm-article-title { font-size: 17px; font-weight: 700; color: #1E1E2E; line-height: 1.4; margin-bottom: 10px; }
+.cm-article-desc { font-size: 14px; color: #5a5a72; line-height: 1.5; margin-bottom: 14px; }
+.cm-article-read { font-size: 14px; font-weight: 600; color: #4B2D8F; }
+.cm-article-read::after { content: ' →'; }
+.cm-articles-more { text-align: center; }
+
+/* ── БЛОК 8 — Форма захвата ── */
+.cm-form-section { background: linear-gradient(135deg, #7FD94C 0%, #4db832 100%); padding: 80px 24px; }
+.cm-form-section .cm-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.cm-form-left { color: #1E1E2E; }
+.cm-form-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 14px; }
+.cm-form-title { font-size: clamp(24px, 3.5vw, 36px); font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+.cm-form-text { font-size: 16px; line-height: 1.6; opacity: 0.8; }
+.cm-form-points { list-style: none; margin-top: 20px; }
+.cm-form-points li { font-size: 15px; padding: 6px 0; display: flex; align-items: flex-start; gap: 10px; }
+.cm-form-points li::before { content: '✓'; font-weight: 700; flex-shrink: 0; }
+.cm-form-box { background: #fff; border-radius: 20px; padding: 36px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+.cm-form-box-title { font-size: 20px; font-weight: 700; color: #1E1E2E; margin-bottom: 24px; text-align: center; }
+.cm-field { margin-bottom: 16px; }
+.cm-field label { display: block; font-size: 14px; font-weight: 600; color: #1E1E2E; margin-bottom: 6px; }
+.cm-field input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e8e4f0;
+  border-radius: 10px;
+  font-family: 'Golos Text', sans-serif;
+  font-size: 15px;
+  color: #1E1E2E;
+  outline: none;
+  transition: border-color 0.15s;
+  background: #fafafa;
+}
+.cm-field input:focus { border-color: #7FD94C; background: #fff; }
+.cm-field input::placeholder { color: #aaa; }
+.cm-form-submit {
+  width: 100%;
+  background: #4B2D8F;
+  color: #fff;
+  font-family: 'Golos Text', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.15s, transform 0.15s;
+}
+.cm-form-submit:hover { background: #3a2070; transform: translateY(-1px); }
+.cm-form-privacy { font-size: 12px; color: #999; text-align: center; margin-top: 12px; line-height: 1.5; }
+
+/* ── Адаптив ── */
+@media (max-width: 768px) {
+  .cm-section { padding: 52px 20px; }
+  .cm-form-section .cm-container { grid-template-columns: 1fr; gap: 36px; }
+  .cm-quiz-steps { gap: 16px; flex-direction: column; align-items: center; }
+  .cm-benefit-card { padding: 24px 18px; }
+}
+@media (max-width: 480px) {
+  .cm-schools-grid { grid-template-columns: 1fr; }
+  .cm-ages-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="cm-landing">
+
+  <!-- ══════════════════════════════════════════
+       БЛОК 2 — ПРЕИМУЩЕСТВА
+       ══════════════════════════════════════════ -->
+  <section class="cm-section cm-benefits">
+    <div class="cm-container">
+      <h2 class="cm-section-title">Почему родители выбирают нас</h2>
+      <p class="cm-section-sub">Помогаем найти школу без лишних звонков, скрытых условий и маркетинговых уловок</p>
+      <div class="cm-benefits-grid">
+        <div class="cm-benefit-card">
+          <div class="cm-benefit-icon">🔍</div>
+          <div class="cm-benefit-title">Только проверенные школы</div>
+          <p class="cm-benefit-text">Изучили программы, цены и реальные отзывы — берём только тех, кому доверяем</p>
+        </div>
+        <div class="cm-benefit-card">
+          <div class="cm-benefit-icon">📵</div>
+          <div class="cm-benefit-title">Без навязчивых звонков</div>
+          <p class="cm-benefit-text">Читайте обзоры и выбирайте в своём темпе — никаких менеджеров и спама на почту</p>
+        </div>
+        <div class="cm-benefit-card">
+          <div class="cm-benefit-icon">💰</div>
+          <div class="cm-benefit-title">Сравниваем цены честно</div>
+          <p class="cm-benefit-text">Показываем реальные стоимости занятий и помогаем найти вариант по бюджету</p>
+        </div>
+        <div class="cm-benefit-card">
+          <div class="cm-benefit-icon">🎯</div>
+          <div class="cm-benefit-title">Подбор под ребёнка</div>
+          <p class="cm-benefit-text">Учитываем возраст, интересы и цель — чтобы ребёнок не бросил через месяц</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       БЛОК 3 — ТОП ШКОЛ
+       ══════════════════════════════════════════ -->
+  <section class="cm-section cm-schools">
+    <div class="cm-container">
+      <h2 class="cm-section-title">Лучшие школы программирования</h2>
+      <p class="cm-section-sub">Отобрали топ-5 по соотношению качество / цена / отзывы родителей</p>
+      <div class="cm-schools-grid">
+
+        <div class="cm-school-card">
+          <span class="cm-school-badge">Топ выбор</span>
+          <div class="cm-school-emoji">🚀</div>
+          <div class="cm-school-name">Progkids</div>
+          <div class="cm-school-age">7–17 лет</div>
+          <p class="cm-school-desc">Программирование на Python, Scratch, веб-разработка. Проектный подход — дети делают реальные игры и сайты</p>
+          <div class="cm-school-price">от 2 500 ₽ <span>/ месяц</span></div>
+          <a href="/shkoly/progkids/" class="cm-school-link">Читать обзор →</a>
+        </div>
+
+        <div class="cm-school-card">
+          <div class="cm-school-emoji">🤖</div>
+          <div class="cm-school-name">Rebotica</div>
+          <div class="cm-school-age">5–16 лет</div>
+          <p class="cm-school-desc">Робототехника и программирование. Первое занятие бесплатно — можно попробовать без обязательств</p>
+          <div class="cm-school-price">от 1 800 ₽ <span>/ месяц</span></div>
+          <a href="/shkoly/rebotica/" class="cm-school-link">Читать обзор →</a>
+        </div>
+
+        <div class="cm-school-card">
+          <span class="cm-school-badge">Малышам</span>
+          <div class="cm-school-emoji">🎮</div>
+          <div class="cm-school-name">Ukids</div>
+          <div class="cm-school-age">5–14 лет</div>
+          <p class="cm-school-desc">Игровой формат обучения — дети осваивают программирование через создание собственных игр в Minecraft и Roblox</p>
+          <div class="cm-school-price">от 2 200 ₽ <span>/ месяц</span></div>
+          <a href="/shkoly/ukids/" class="cm-school-link">Читать обзор →</a>
+        </div>
+
+        <div class="cm-school-card">
+          <div class="cm-school-emoji">💡</div>
+          <div class="cm-school-name">Айтигенио</div>
+          <div class="cm-school-age">6–17 лет</div>
+          <p class="cm-school-desc">Широкий выбор направлений: программирование, дизайн, аналитика данных. Есть группы по интересам</p>
+          <div class="cm-school-price">от 2 000 ₽ <span>/ месяц</span></div>
+          <a href="/shkoly/ajtigenio/" class="cm-school-link">Читать обзор →</a>
+        </div>
+
+        <div class="cm-school-card">
+          <div class="cm-school-emoji">🛸</div>
+          <div class="cm-school-name">Rocket Tech</div>
+          <div class="cm-school-age">5–17 лет</div>
+          <p class="cm-school-desc">Онлайн-школа с живыми преподавателями. Пробный урок за 469 ₽ — убедитесь что подходит до покупки курса</p>
+          <div class="cm-school-price">от 2 800 ₽ <span>/ месяц</span></div>
+          <a href="/shkoly/rocket-tech/" class="cm-school-link">Читать обзор →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       БЛОК 4 — КАК ВЫБРАТЬ ПО ВОЗРАСТУ
+       ══════════════════════════════════════════ -->
+  <section class="cm-section cm-ages">
+    <div class="cm-container">
+      <h2 class="cm-section-title">Выбор курса по возрасту</h2>
+      <p class="cm-section-sub">Разные возрасты — разные задачи. Рассказываем, что подходит вашему ребёнку</p>
+      <div class="cm-ages-grid">
+
+        <div class="cm-age-card cm-age-card-1">
+          <span class="cm-age-emoji">🐣</span>
+          <div class="cm-age-range">5–7 лет</div>
+          <div class="cm-age-title">Первые шаги в IT</div>
+          <ul class="cm-age-list">
+            <li>Визуальное программирование (Scratch Jr)</li>
+            <li>Логика и алгоритмы через игру</li>
+            <li>Короткие занятия 25–30 минут</li>
+            <li>Без клавиатуры — только мышь и планшет</li>
+          </ul>
+          <a href="/vozrast/5-7-let/" class="cm-age-btn">Школы для малышей →</a>
+        </div>
+
+        <div class="cm-age-card cm-age-card-2">
+          <span class="cm-age-emoji">🧒</span>
+          <div class="cm-age-range">8–11 лет</div>
+          <div class="cm-age-title">Осознанное обучение</div>
+          <ul class="cm-age-list">
+            <li>Scratch, Python для начинающих</li>
+            <li>Создание игр и мультфильмов</li>
+            <li>Minecraft и Roblox — программирование через игру</li>
+            <li>Первые реальные проекты</li>
+          </ul>
+          <a href="/vozrast/8-11-let/" class="cm-age-btn">Школы для школьников →</a>
+        </div>
+
+        <div class="cm-age-card cm-age-card-3">
+          <span class="cm-age-emoji">🧑‍💻</span>
+          <div class="cm-age-range">12–17 лет</div>
+          <div class="cm-age-title">Профессиональный старт</div>
+          <ul class="cm-age-list">
+            <li>Python, JavaScript, веб-разработка</li>
+            <li>Подготовка к ЕГЭ по информатике</li>
+            <li>Портфолио для поступления</li>
+            <li>Реальные навыки для первой работы</li>
+          </ul>
+          <a href="/vozrast/12-17-let/" class="cm-age-btn">Школы для подростков →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       БЛОК 5 — КВИЗ CTA
+       ══════════════════════════════════════════ -->
+  <section class="cm-quiz">
+    <div class="cm-container">
+      <div class="cm-quiz-label">Бесплатный подбор за 2 минуты</div>
+      <h2 class="cm-quiz-title">Не знаете, с чего начать?<br>Пройдите короткий тест</h2>
+      <p class="cm-quiz-sub">Ответьте на 5 вопросов — и мы подберём 2–3 школы, которые подходят именно вашему ребёнку</p>
+      <div class="cm-quiz-steps">
+        <div class="cm-quiz-step"><span class="cm-quiz-step-num">1</span> Возраст ребёнка</div>
+        <div class="cm-quiz-step"><span class="cm-quiz-step-num">2</span> Интересы и цели</div>
+        <div class="cm-quiz-step"><span class="cm-quiz-step-num">3</span> Удобный формат</div>
+        <div class="cm-quiz-step"><span class="cm-quiz-step-num">4</span> Бюджет</div>
+        <div class="cm-quiz-step"><span class="cm-quiz-step-num">5</span> Результат →</div>
+      </div>
+      <a href="/quiz/" class="cm-btn">Пройти тест бесплатно →</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       БЛОК 6 — ОТЗЫВЫ РОДИТЕЛЕЙ
+       ══════════════════════════════════════════ -->
+  <section class="cm-section cm-reviews">
+    <div class="cm-container">
+      <h2 class="cm-section-title">Что говорят родители</h2>
+      <p class="cm-section-sub">Реальные истории от мам и пап, которые уже выбрали школу</p>
+      <div class="cm-reviews-grid">
+
+        <div class="cm-review-card">
+          <div class="cm-review-quote">"</div>
+          <div class="cm-review-stars">★★★★★</div>
+          <p class="cm-review-text">Долго не могла выбрать школу для сына (9 лет) — везде красивые сайты, но непонятно что внутри. На CodeMini нашла подробные обзоры с ценами и минусами. Записались в Progkids, ребёнок в восторге уже 3 месяца!</p>
+          <div class="cm-review-author">
+            <div class="cm-review-avatar">М</div>
+            <div>
+              <div class="cm-review-name">Мария К.</div>
+              <div class="cm-review-meta">Мама Артёма, 9 лет · Москва</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cm-review-card">
+          <div class="cm-review-quote">"</div>
+          <div class="cm-review-stars">★★★★★</div>
+          <p class="cm-review-text">Сравнение Ukids и Rebotica помогло за 10 минут принять решение — всё разложено по полочкам. Дочка (7 лет) занимается в Ukids, делает игры в Roblox и рассказывает всем что она «программист».</p>
+          <div class="cm-review-author">
+            <div class="cm-review-avatar">А</div>
+            <div>
+              <div class="cm-review-name">Андрей В.</div>
+              <div class="cm-review-meta">Папа Алисы, 7 лет · Санкт-Петербург</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cm-review-card">
+          <div class="cm-review-quote">"</div>
+          <div class="cm-review-stars">★★★★★</div>
+          <p class="cm-review-text">Сын готовится к ЕГЭ по информатике. Нашла статью про Годограф — честный разбор, без воды. Записались, преподаватель грамотный. Спасибо, что пишете про минусы тоже, это важно!</p>
+          <div class="cm-review-author">
+            <div class="cm-review-avatar">Е</div>
+            <div>
+              <div class="cm-review-name">Елена Н.</div>
+              <div class="cm-review-meta">Мама Никиты, 16 лет · Екатеринбург</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       БЛОК 7 — ПОСЛЕДНИЕ СТАТЬИ
+       ══════════════════════════════════════════ -->
+  <section class="cm-section cm-articles">
+    <div class="cm-container">
+      <h2 class="cm-section-title">Полезные статьи для родителей</h2>
+      <p class="cm-section-sub">Помогаем разобраться в детском IT-образовании без маркетинга и лишних слов</p>
+      <div class="cm-articles-grid">
+
+        <a href="/shkoly/progkids/" class="cm-article-card">
+          <div class="cm-article-thumb cm-article-thumb-1">💻</div>
+          <div class="cm-article-body">
+            <span class="cm-article-tag">Обзор школы</span>
+            <div class="cm-article-title">Progkids — честный обзор: цены, программа и отзывы родителей</div>
+            <p class="cm-article-desc">Разобрали всё что важно: какие курсы есть, сколько стоит, что говорят родители после 3+ месяцев обучения</p>
+            <span class="cm-article-read">Читать статью</span>
+          </div>
+        </a>
+
+        <a href="/blog/kak-vybrat-kurs-programmirovaniya/" class="cm-article-card">
+          <div class="cm-article-thumb cm-article-thumb-2">🎯</div>
+          <div class="cm-article-body">
+            <span class="cm-article-tag">Гайд</span>
+            <div class="cm-article-title">Как выбрать курс программирования для ребёнка: 7 критериев</div>
+            <p class="cm-article-desc">На что смотреть кроме цены: методика, преподаватели, результат после курса и как не нарваться на красивый сайт с плохим качеством</p>
+            <span class="cm-article-read">Читать статью</span>
+          </div>
+        </a>
+
+        <a href="/vozrast/5-7-let/" class="cm-article-card">
+          <div class="cm-article-thumb cm-article-thumb-3">🐣</div>
+          <div class="cm-article-body">
+            <span class="cm-article-tag">По возрасту</span>
+            <div class="cm-article-title">Программирование для детей 5–7 лет: с чего начать в 2025 году</div>
+            <p class="cm-article-desc">Топ-5 школ для малышей, которые не заставляют учить команды, а учат мыслить логически через игру</p>
+            <span class="cm-article-read">Читать статью</span>
+          </div>
+        </a>
+
+      </div>
+      <div class="cm-articles-more">
+        <a href="/blog/" class="cm-btn cm-btn-outline">Все статьи →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       БЛОК 8 — ФОРМА ЗАХВАТА
+       Если используете WPForms — замените форму ниже на шорткод:
+       [wpforms id="YOUR_FORM_ID"]
+       ══════════════════════════════════════════ -->
+  <section class="cm-form-section">
+    <div class="cm-container">
+      <div class="cm-form-left">
+        <div class="cm-form-label">Бесплатная консультация</div>
+        <h2 class="cm-form-title">Подберём школу лично для вашего ребёнка</h2>
+        <p class="cm-form-text">Расскажите о ребёнке — мы пришлём подборку из 2–3 школ с объяснением почему именно они</p>
+        <ul class="cm-form-points">
+          <li>Учитываем возраст, интересы и бюджет</li>
+          <li>Отвечаем в течение 24 часов</li>
+          <li>Без звонков — только в мессенджер</li>
+          <li>Полностью бесплатно</li>
+        </ul>
+      </div>
+      <div class="cm-form-box">
+        <div class="cm-form-box-title">Получить подборку бесплатно</div>
+        <form action="#" method="post" onsubmit="return false;">
+          <div class="cm-field">
+            <label for="cm_name">Ваше имя</label>
+            <input type="text" id="cm_name" name="name" placeholder="Например, Мария" autocomplete="name">
+          </div>
+          <div class="cm-field">
+            <label for="cm_child_age">Возраст ребёнка</label>
+            <input type="text" id="cm_child_age" name="child_age" placeholder="Например, 9 лет">
+          </div>
+          <div class="cm-field">
+            <label for="cm_phone">Телефон или Telegram</label>
+            <input type="tel" id="cm_phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+          </div>
+          <button type="submit" class="cm-form-submit">Получить подборку →</button>
+          <p class="cm-form-privacy">Нажимая кнопку, вы соглашаетесь с <a href="/privacy/" style="color:#4B2D8F;">политикой конфиденциальности</a>. Не звоним, не спамим.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- / cm-landing -->
