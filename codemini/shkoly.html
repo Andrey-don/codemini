@@ -139,11 +139,12 @@
 .sk-card-footer {
   padding: 20px 28px 28px;
   border-top: 1px solid #f0ebff;
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
 }
-.sk-price { flex: 1; }
+.sk-price { flex: 1; min-width: 100px; }
 .sk-price-val { font-size: 20px; font-weight: 900; color: var(--sk-dark); }
 .sk-price-note { font-size: 12px; color: var(--sk-gray); margin-top: 1px; }
+.sk-card-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 .sk-card-cta {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--sk-green); color: var(--sk-dark);
@@ -163,6 +164,14 @@
   white-space: nowrap;
 }
 .sk-card-cta-ghost:hover { background: var(--sk-purple); color: #fff; }
+
+/* ─── АНИМАЦИЯ СЧЁТЧИКА ───────────────────────────────── */
+@keyframes sk-flash {
+  0%   { color: var(--sk-gray); }
+  40%  { color: var(--sk-purple); font-size: 15px; }
+  100% { color: var(--sk-gray); }
+}
+.sk-catalog-title.sk-updated { animation: sk-flash .55s ease; }
 
 /* ─── BOTTOM CTA ──────────────────────────────────────── */
 .sk-bottom {
@@ -230,8 +239,8 @@
 </div>
 
 <!-- ═══ КАТАЛОГ ═══ -->
-<div class="sk-catalog">
-  <div class="sk-catalog-title">6 школ — сортировка по рейтингу</div>
+<div class="sk-catalog" id="sk-catalog">
+  <div class="sk-catalog-title" id="sk-results">6 школ — сортировка по рейтингу</div>
   <div class="sk-grid">
 
     <!-- ── PROGKIDS ── -->
@@ -291,7 +300,10 @@
           <div class="sk-price-val">от 2 500 ₽</div>
           <div class="sk-price-note">в месяц · 4 занятия</div>
         </div>
-        <a href="/shkoly/progkids/" class="sk-card-cta">Читать обзор →</a>
+        <div class="sk-card-btns">
+          <a href="/shkoly/progkids/" class="sk-card-cta-ghost">Читать обзор</a>
+          <a href="[ПАРТНЕРСКАЯ_ССЫЛКА_PROGKIDS]" class="sk-card-cta" rel="nofollow sponsored" target="_blank">Попробовать →</a>
+        </div>
       </div>
     </div>
 
@@ -351,7 +363,10 @@
           <div class="sk-price-val">от 1 800 ₽</div>
           <div class="sk-price-note">в месяц · 4 занятия</div>
         </div>
-        <a href="/shkoly/rebotica/" class="sk-card-cta">Читать обзор →</a>
+        <div class="sk-card-btns">
+          <a href="/shkoly/rebotica/" class="sk-card-cta-ghost">Читать обзор</a>
+          <a href="[ПАРТНЕРСКАЯ_ССЫЛКА_REBOTICA]" class="sk-card-cta" rel="nofollow sponsored" target="_blank">Попробовать →</a>
+        </div>
       </div>
     </div>
 
@@ -412,7 +427,10 @@
           <div class="sk-price-val">от 2 200 ₽</div>
           <div class="sk-price-note">в месяц · 4 занятия</div>
         </div>
-        <a href="/shkoly/ukids/" class="sk-card-cta">Читать обзор →</a>
+        <div class="sk-card-btns">
+          <a href="/shkoly/ukids/" class="sk-card-cta-ghost">Читать обзор</a>
+          <a href="[ПАРТНЕРСКАЯ_ССЫЛКА_UKIDS]" class="sk-card-cta" rel="nofollow sponsored" target="_blank">Попробовать →</a>
+        </div>
       </div>
     </div>
 
@@ -472,7 +490,10 @@
           <div class="sk-price-val">от 2 000 ₽</div>
           <div class="sk-price-note">в месяц · 4 занятия</div>
         </div>
-        <a href="/shkoly/ajtigenio/" class="sk-card-cta">Читать обзор →</a>
+        <div class="sk-card-btns">
+          <a href="/shkoly/ajtigenio/" class="sk-card-cta-ghost">Читать обзор</a>
+          <a href="[ПАРТНЕРСКАЯ_ССЫЛКА_AJTIGENIO]" class="sk-card-cta" rel="nofollow sponsored" target="_blank">Попробовать →</a>
+        </div>
       </div>
     </div>
 
@@ -532,7 +553,10 @@
           <div class="sk-price-val">от 2 800 ₽</div>
           <div class="sk-price-note">в месяц · 4 занятия</div>
         </div>
-        <a href="/shkoly/rocket-tech/" class="sk-card-cta">Читать обзор →</a>
+        <div class="sk-card-btns">
+          <a href="/shkoly/rocket-tech/" class="sk-card-cta-ghost">Читать обзор</a>
+          <a href="[ПАРТНЕРСКАЯ_ССЫЛКА_ROCKET_TECH]" class="sk-card-cta" rel="nofollow sponsored" target="_blank">Попробовать →</a>
+        </div>
       </div>
     </div>
 
@@ -593,7 +617,10 @@
           <div class="sk-price-val">Уточняйте</div>
           <div class="sk-price-note">зависит от программы</div>
         </div>
-        <a href="/shkoly/godograf/" class="sk-card-cta">Читать обзор →</a>
+        <div class="sk-card-btns">
+          <a href="/shkoly/godograf/" class="sk-card-cta-ghost">Читать обзор</a>
+          <a href="[ПАРТНЕРСКАЯ_ССЫЛКА_GODOGRAF]" class="sk-card-cta" rel="nofollow sponsored" target="_blank">Попробовать →</a>
+        </div>
       </div>
     </div>
 
