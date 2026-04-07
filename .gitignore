@@ -29,3 +29,6 @@ Thumbs.db
 # Temp files
 *.log
 .codemini_restart_chat_id
+
+# Локальные бэкапы (большие файлы, не нужны в git)
+backups/
